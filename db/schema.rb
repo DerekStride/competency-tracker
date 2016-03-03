@@ -11,13 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160303161430) do
+ActiveRecord::Schema.define(version: 20160303220817) do
 
   create_table "competencies", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "postrequisites_prerequisites", id: false, force: :cascade do |t|
+    t.integer "postreq_id"
+    t.integer "prereq_id"
+  end
+
+  add_index "postrequisites_prerequisites", ["postreq_id", "prereq_id"], name: "index_postrequisites_prerequisites_on_postreq_id_and_prereq_id", unique: true
+  add_index "postrequisites_prerequisites", ["prereq_id", "postreq_id"], name: "index_postrequisites_prerequisites_on_prereq_id_and_postreq_id", unique: true
 
   create_table "topics", force: :cascade do |t|
     t.string   "name"

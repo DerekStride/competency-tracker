@@ -1,5 +1,14 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-gems:
-  name: Gems
-  competency_id: 1
+# gems:
+#   id: 1
+#   postreq_id: 2
+#   name: Gems
+#   competency_id: 1
+#
+# threading:
+#   id: 2
+#   postreq_id: 2
+#   name: Threading
+#   competency_id: 1
+#   prerequisites: gems
