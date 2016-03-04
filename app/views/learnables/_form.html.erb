@@ -1,0 +1,17 @@
+<%= form_for(@learnable) do |f| %>
+  <% if @learnable.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@learnable.errors.count, "error") %> prohibited this learnable from being saved:</h2>
+
+      <ul>
+      <% @learnable.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
