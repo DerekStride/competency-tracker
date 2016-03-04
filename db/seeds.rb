@@ -6,10 +6,13 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+learning_source = LearningSource.new(name: 'Book')
+learning_source.save!
 tag = Tag.create(name: 'Beginner')
 tag.save!
 comp = Competency.create(name: 'Ruby')
 comp.tags << tag
 comp.save!
 topic = Topic.create(name: 'Gems', competency: comp)
+topic.learning_sources << learning_source
 topic.save!

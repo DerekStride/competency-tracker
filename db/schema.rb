@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160304013434) do
+ActiveRecord::Schema.define(version: 20160304014132) do
 
   create_table "competencies", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -21,11 +21,10 @@ ActiveRecord::Schema.define(version: 20160304013434) do
   create_table "learnables", force: :cascade do |t|
     t.string   "name"
     t.string   "proficiency"
-    t.string   "learning_source"
     t.string   "type"
     t.integer  "competency_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   add_index "learnables", ["competency_id"], name: "index_learnables_on_competency_id"
@@ -37,6 +36,15 @@ ActiveRecord::Schema.define(version: 20160304013434) do
 
   add_index "learnables_tags", ["learnable_id"], name: "index_learnables_tags_on_learnable_id"
   add_index "learnables_tags", ["tag_id"], name: "index_learnables_tags_on_tag_id"
+
+  create_table "learning_sources", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "learnable_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "learning_sources", ["learnable_id"], name: "index_learning_sources_on_learnable_id"
 
   create_table "postrequisites_prerequisites", force: :cascade do |t|
     t.integer "postreq_id"

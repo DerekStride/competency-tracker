@@ -11,6 +11,7 @@ class Learnable < ActiveRecord::Base
     join_table: :postrequisites_prerequisites
 
   has_and_belongs_to_many :tags
+  has_many :learning_sources
   belongs_to :competency
 
 
