@@ -41,8 +41,11 @@ class LearnablesController < ApplicationController
   # PATCH/PUT /learnables/1
   # PATCH/PUT /learnables/1.json
   def update
+    @learnable.update(learnable_params)
+    add_tags
+    add_topics
     respond_to do |format|
-      if @learnable.update(learnable_params)
+      if @learnable.save
         format.html { redirect_to @learnable, notice: 'Learnable was successfully updated.' }
         format.json { render :show, status: :ok, location: @learnable }
       else
@@ -70,6 +73,19 @@ class LearnablesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def learnable_params
-      params.fetch(:learnables, {}).permit(:name, tag_ids: [])
+      params.fetch(:learnables, {}).permit(:name)
+    end
+
+    def add_tags
+      tags = params.fetch(:learnables, {}).permit(tag: :id)
+      return unless tags.present?
+      tag = Tag.find(tags[:tag][:id])
+      @learnable.tags << tag unless @learnable.tags.include?(tag)
+    end
+
+    def add_topics
+      topic = params.fetch(:topic, {}).permit(topic: :id)
+      return unless topic.present?
+      @learnable.competency = Learnable.find(topic[:topic][:id])
     end
 end

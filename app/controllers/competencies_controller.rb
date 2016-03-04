@@ -40,8 +40,10 @@ class CompetenciesController < ApplicationController
   # PATCH/PUT /competencies/1
   # PATCH/PUT /competencies/1.json
   def update
+    @competency.update(competency_params)
+    add_competencies
     respond_to do |format|
-      if @competency.update(competency_params)
+      if @competency.save
         format.html { redirect_to @competency, notice: 'Competency was successfully updated.' }
         format.json { render :show, status: :ok, location: @competency }
       else
@@ -70,5 +72,11 @@ class CompetenciesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def competency_params
       params.fetch(:competency, {}).permit(:name)
+    end
+
+    def add_competencies
+      competency = params.fetch(:competency, {}).permit(competency: :id)
+      return unless competency.present?
+      @competency.learnables << Learnable.find(competency[:competency][:id])
     end
 end
