@@ -1,6 +1,6 @@
-class CreateTopicPrerequisites < ActiveRecord::Migration
+class CreateLearnableJoinTable < ActiveRecord::Migration
   def change
-    create_table :postrequisites_prerequisites, id: false do |t|
+    create_table :postrequisites_prerequisites do |t|
       t.integer :postreq_id
       t.integer :prereq_id
     end

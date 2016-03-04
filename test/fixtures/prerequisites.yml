@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  preq_id: 1
+  postreq_id: 1
+
+two:
+  preq_id: 1
+  postreq_id: 1

@@ -11,15 +11,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160303220817) do
+ActiveRecord::Schema.define(version: 20160304013434) do
 
   create_table "competencies", force: :cascade do |t|
-    t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "postrequisites_prerequisites", id: false, force: :cascade do |t|
+  create_table "learnables", force: :cascade do |t|
+    t.string   "name"
+    t.string   "proficiency"
+    t.string   "learning_source"
+    t.string   "type"
+    t.integer  "competency_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "learnables", ["competency_id"], name: "index_learnables_on_competency_id"
+
+  create_table "learnables_tags", force: :cascade do |t|
+    t.integer "learnable_id"
+    t.integer "tag_id"
+  end
+
+  add_index "learnables_tags", ["learnable_id"], name: "index_learnables_tags_on_learnable_id"
+  add_index "learnables_tags", ["tag_id"], name: "index_learnables_tags_on_tag_id"
+
+  create_table "postrequisites_prerequisites", force: :cascade do |t|
     t.integer "postreq_id"
     t.integer "prereq_id"
   end
@@ -27,13 +46,15 @@ ActiveRecord::Schema.define(version: 20160303220817) do
   add_index "postrequisites_prerequisites", ["postreq_id", "prereq_id"], name: "index_postrequisites_prerequisites_on_postreq_id_and_prereq_id", unique: true
   add_index "postrequisites_prerequisites", ["prereq_id", "postreq_id"], name: "index_postrequisites_prerequisites_on_prereq_id_and_postreq_id", unique: true
 
-  create_table "topics", force: :cascade do |t|
+  create_table "tags", force: :cascade do |t|
     t.string   "name"
-    t.integer  "competency_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  add_index "topics", ["competency_id"], name: "index_topics_on_competency_id"
+  create_table "topics", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
 end

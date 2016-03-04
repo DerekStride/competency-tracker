@@ -1,3 +1,3 @@
-class Competency < ActiveRecord::Base
-  has_many :topics
+class Competency < Learnable
+  has_many :learnables
 end
