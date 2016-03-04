@@ -19,6 +19,7 @@ class LearnablesController < ApplicationController
 
   # GET /learnables/1/edit
   def edit
+    @learnable = Learnable.find(params[:id])
   end
 
   # POST /learnables
@@ -69,6 +70,6 @@ class LearnablesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def learnable_params
-      params.fetch(:learnable, {})
+      params.fetch(:learnables, {}).permit(:name, tag_ids: [])
     end
 end
