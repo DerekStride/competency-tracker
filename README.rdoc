@@ -1,3 +1,18 @@
+
+(is this the right place to state the purpose of this project?)
+
+Purpose: make it easy for employees to track their competencies as well as others’. Useful for tracking learning (technical, managerial, etc.) as well as finding experts (e.g., for code review). Competency levels could follow a simplified version of Bloom’s taxonomy (or any other custom one); they get acquired via learning sources and assessed by assessors (team lead, peer, in-house instructor, etc.). Ideally would connect to existing tools (HR/employee list) or even be simply an extension thereof.
+
+Current status and roadmap: 
+
+* the first aim is to provide a Model for competencies (as per the short description above); 
+
+* then a REST API for CRUD but also to generate custom competency map of prerequisites, with links to the relevant employees, teams, learning material, etc.;
+
+* scripts to upload competencies from various sources, mostly spreadsheets in various forms;
+
+* a front-end to visualize and track progress, to assess, to navigate, etc.
+
 == README
 
 This README would normally document whatever steps are necessary to get the
