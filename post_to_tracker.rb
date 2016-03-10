@@ -1,4 +1,5 @@
 require 'net/http'
+require 'rest-client'
 require 'json'
 require 'pry'
 require 'pp'
@@ -64,39 +65,40 @@ def post_competencies(comp, parent = nil)
   @json.fetch(:competencies, {}).each do |topic, comps|
     competency = comps.fetch(comp, '')
     next if competency.empty? || competencies.include?(competency)
-    pp `HTTP POST http://localhost:3000/competencies.json competency:='{"name": "#{competency}"}'`
+    response = RestClient.post 'http://localhost:3000/competencies.json', competency: { name: competency }
+    result = JSON.parse(response.body, symbolize_names: true)
+
     competencies << competency
 
     parent_comp = comps[parent] || 'ACM'
-    latest = latest_competencies
-    competency_id = competencies_id_from_name(competency, latest)
-    parent_id = competencies_id_from_name(parent_comp, latest)
-    pp `HTTP PUT http://localhost:3000/competencies/#{parent_id}.json competency:='{"competency":{"id": #{competency_id}}}'`
+    parent_id = competencies_id_from_name(parent_comp, latest_competencies)
+    response = RestClient.put "http://localhost:3000/competencies/#{parent_id}.json", competency: { competency: { id: result.fetch(:id) } }
   end
 end
 
 def post_topics(comp)
   topics = latest_topics_names
-
   @json.fetch(:competencies, {}).each do |topic, comps|
+    topic = topic.to_s
+    pp topic
     next if topic.empty? || topics.include?(topic)
-    pp `HTTP POST http://localhost:3000/topics.json topic:='{"name": "#{topic}"}'`
+    response = RestClient.post 'http://localhost:3000/topics.json', topic: { name: topic }
+    result = JSON.parse(response.body, symbolize_names: true)
     topics << topic
 
     parent_comp = comps.fetch(comp)
-    latest = latest_topics
-    topic_id = topic_id_from_name(topic, latest)
-    parent_id = competencies_id_from_name(parent_comp, latest)
-    pp `HTTP PUT http://localhost:3000/competencies/#{parent_id}.json competency:='{"competency":{"id": #{topic_id}}}'`
+    topic_id = topic_id_from_name(topic, latest_topics)
+    parent_id = competencies_id_from_name(parent_comp, latest_competencies)
+    response = RestClient.put "http://localhost:3000/competencies/#{parent_id}.json", competency: { competency: { id: topic_id } }
   end
 end
 
 root_competency = 'ACM'
-pp `HTTP POST http://localhost:3000/competencies.json competency:='{"name": "#{root_competency}"}'`
+RestClient.post 'http://localhost:3000/competencies.json', competency: { name: root_competency }
 
 post_competencies(:area)
 post_competencies(:subArea, :area)
-# post_topics(:subArea)
+post_topics(:subArea)
 #
 # post_topics
 # put_sub_topics
