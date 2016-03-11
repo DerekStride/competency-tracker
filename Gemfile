@@ -35,6 +35,8 @@ group :development, :test do
   gem 'byebug'
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3'
+  # Use RSpec for testing API calls
+  gem 'rspec-rails'
 end
 
 group :development do
