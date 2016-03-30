@@ -1,4 +1,4 @@
-class CreateLearnableJoinTable < ActiveRecord::Migration
+class CreateCompetencyJoinTable < ActiveRecord::Migration
   def change
     create_table :postrequisites_prerequisites do |t|
       t.integer :postreq_id
