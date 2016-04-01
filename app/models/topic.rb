@@ -1,2 +1,0 @@
-class Topic < Learnable
-end

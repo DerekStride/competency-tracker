@@ -13,6 +13,6 @@ tag.save!
 comp = Competency.create(name: 'Ruby')
 comp.tags << tag
 comp.save!
-topic = Topic.create(name: 'Gems', competency: comp)
+topic = Competency.create(name: 'Gems', topic: comp)
 topic.learning_sources << learning_source
 topic.save!
