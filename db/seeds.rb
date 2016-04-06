@@ -16,3 +16,9 @@ comp.save!
 topic = Competency.create(name: 'Gems', topic: comp)
 topic.learning_sources << learning_source
 topic.save!
+
+u = User.new
+u.competencies << comp
+u.user_competencies.first.level = 'Great'
+u.user_competencies.first.assessor = u
+u.save!

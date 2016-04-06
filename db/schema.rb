@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160324191825) do
+ActiveRecord::Schema.define(version: 20160406191018) do
 
   create_table "competencies", force: :cascade do |t|
     t.datetime "created_at",    null: false
@@ -54,6 +54,19 @@ ActiveRecord::Schema.define(version: 20160324191825) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "user_competencies", force: :cascade do |t|
+    t.integer  "competency_id"
+    t.integer  "user_id"
+    t.integer  "assessor_id"
+    t.integer  "assessed_id"
+    t.string   "level"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "user_competencies", ["competency_id"], name: "index_user_competencies_on_competency_id"
+  add_index "user_competencies", ["user_id"], name: "index_user_competencies_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "provider"
