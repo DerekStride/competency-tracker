@@ -28,7 +28,7 @@ describe SessionsController do
   end
 
   describe "GET #create" do
-    it "returns http success" do
+    it "creates a user and redirects to root" do
       session[:user_id].should be nil
       get :create
       session[:user_id].should_not be nil
@@ -37,7 +37,7 @@ describe SessionsController do
   end
 
   describe "GET #destroy" do
-    it "returns http success" do
+    it "redirects to root" do
       get :destroy
       response.should redirect_to root_url
     end
