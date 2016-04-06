@@ -9,9 +9,10 @@ RSpec.describe CompetenciesController, type: :controller do
     end
 
     it "returns all the competencies" do
-      FactoryGirl.create :competency, name: "Nginx"
+      FactoryGirl.create :competency
       FactoryGirl.create :competency, name: "Can juggle"
-      get :index
+      #get :index
+      get :index, {}, { "Accept" => "application/json" }
       body = JSON.parse(response.body)
       competency_names = body.map { |c| c["name"]}
 
