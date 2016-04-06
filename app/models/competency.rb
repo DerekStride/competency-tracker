@@ -15,4 +15,7 @@ class Competency < ActiveRecord::Base
 
   belongs_to :topic, class_name: 'Competency', foreign_key: :competency_id
   has_many :subtopics, class_name: 'Competency', foreign_key: :competency_id
+
+  has_many :user_competencies
+  has_many :users, through: :user_competencies
 end
