@@ -49,6 +49,23 @@ RSpec.describe CompetenciesController, type: :controller do
   	  competency_names = body.map { |c| c["name"]}
       expect(competency_names).to match_array(["Can solve Sudoku"])
     end
+
+    it "successfully updates a competency by adding a sub-competency" do
+      post :create, competency: { name: "Can solve Rubik's cube" }
+      post :create, competency: { name: "Can solve it in 30 seconds or less"}
+
+  	  get :index
+  	  body = JSON.parse(response.body)
+  	  competency_names = body.map { |c| c["name"]}
+  	  expect(competency_names).to match_array(["Can solve Rubik's cube", "Can solve it in 30 seconds or less"])
+
+  	  id = body.first["id"]
+  	  id2 = body.last["id"]
+
+  	  # make id2 the sub-competency of id
+  	  put :update, id: id, competency: {competency: {id: id2} }
+  	  expect(Competency.last.topic).to eq Competency.first
+  	end 
   end
 
 end
