@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'pp'
 
 RSpec.describe CompetenciesController, type: :controller do
   describe "GET #index" do
@@ -24,13 +23,9 @@ RSpec.describe CompetenciesController, type: :controller do
   describe "POST /competencies" do
   	it "creates a competency successfully" do
   	  post :create, competency: { name: "Can solve Rubik's cube" }
-  	  
-  	  get :index
-  	  body = JSON.parse(response.body)
 
-      competency_names = body.map { |c| c["name"]}
+      expect(Competency.first.name).to eq "Can solve Rubik's cube"
 
-      expect(competency_names).to match_array(["Can solve Rubik's cube"])
     end
   end
 
@@ -44,10 +39,8 @@ RSpec.describe CompetenciesController, type: :controller do
 
   	  put :update, id: id, competency: { name: "Can solve Sudoku" }
  
-  	  get :index
-  	  body = JSON.parse(response.body)
-  	  competency_names = body.map { |c| c["name"]}
-      expect(competency_names).to match_array(["Can solve Sudoku"])
+      expect(Competency.first.name).to eq "Can solve Sudoku"
+
     end
 
     it "successfully updates a competency by adding a sub-competency" do
