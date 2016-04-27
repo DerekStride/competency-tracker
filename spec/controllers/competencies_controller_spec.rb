@@ -21,7 +21,16 @@ RSpec.describe CompetenciesController, type: :controller do
 
       expect(competency_names).to match_array(["Can solve Rubik's cube", "Can juggle"])
     end
+  end
 
+  describe "GET /competencies/:id" do
+  	it "returns a requested competency" do
+  	  get :show, id: Competency.last.id
+  	  expect(response).to be_success
+  	  body = JSON.parse(response.body)
+
+      expect(body["name"]).to eq "Can solve Rubik's cube"
+    end
   end
 
   describe "POST /competencies" do

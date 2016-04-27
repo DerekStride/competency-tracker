@@ -1,4 +1,5 @@
 class CompetenciesController < ApplicationController
+  respond_to :html, :json
   before_action :set_competency, only: [:show, :edit, :update, :destroy]
   before_action :ensure_params, only: [:create]
 
@@ -12,14 +13,7 @@ class CompetenciesController < ApplicationController
   # GET /competencies/1
   # GET /competencies/1.json
   def show
-    respond_with @competency do |format|
-      format.json do
-        render json: {}, status: :ok
-      end
-      format.html do
-        redirect_to @competency
-      end
-    end
+    render json: Competency.find(params[:id])
   end
 
   # GET /competencies/new
