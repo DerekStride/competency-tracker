@@ -25,6 +25,6 @@ This is your typical rails app. Clone it, then run rails server. Alternately, de
 
 Using [HTTPIE](https://github.com/jkbrzt/httpie), with a local server you can create a basic competency like so:
 
-`http PUT :3000/competencies/1 name=Juggling`
+`http PUT :3000/competencies/1.json name=Juggling`
 
 See our competency controller specs for more complex examples.
