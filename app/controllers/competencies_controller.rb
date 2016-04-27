@@ -78,6 +78,6 @@ class CompetenciesController < ApplicationController
     def add_competencies
       competency = params.fetch(:competency, {}).permit(competency: :id)
       return unless competency.present?
-      @competency.learnables << Learnable.find(competency[:competency][:id])
+      @competency.subtopics << Competency.find(competency[:competency][:id])
     end
 end
