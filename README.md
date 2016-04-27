@@ -1,8 +1,6 @@
+# Purpose [![Build Status](https://travis-ci.org/DerekStride/competency-tracker.svg?branch=master)](https://travis-ci.org/DerekStride/competency-tracker)
 
-
-# Purpose
-
-A RESTful service to make it easy for employees to track their *competencies* as well as others’. Useful for tracking learning (technical, managerial, etc.) as well as finding experts (e.g., for code review). *Mastery levels* can be specified for each competency and employee, and could follow a simplified version of [Bloom’s taxonomy](https://en.wikipedia.org/wiki/Bloom%27s_taxonomy) (or any other custom one); they get acquired via *learning sources* and assessed by *assessors* (team lead, peer, in-house instructor, etc.). 
+A RESTful service to make it easy for employees to track their *competencies* as well as others’. Useful for tracking learning (technical, managerial, etc.) as well as finding experts (e.g., for code review). *Mastery levels* can be specified for each competency and employee, and could follow a simplified version of [Bloom’s taxonomy](https://en.wikipedia.org/wiki/Bloom%27s_taxonomy) (or any other custom one); they get acquired via *learning sources* and assessed by *assessors* (team lead, peer, in-house instructor, etc.).
 
 Competencies can be organized in hierarchies (think: area, subarea, etc.). At the leaf level, they can be used to express *learning outcomes*.
 
@@ -12,7 +10,7 @@ Ideally would connect to existing tools (HR/employee list) or even be simply an 
 
 # Current status and roadmap
 
-- [x] provide a Model for competencies (as per the short description above); 
+- [x] provide a Model for competencies (as per the short description above);
 - [x] a REST API for CRUD
 - [x] Google OAUTH for user authentication
 - [ ] generate custom competency map of prerequisites, with links to the relevant employees, teams, learning material, etc.;
