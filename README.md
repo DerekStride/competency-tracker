@@ -23,6 +23,8 @@ Ideally would connect to existing tools (HR/employee list) or even be simply an 
 
 This is your typical rails app. Clone it, then run rails server. Alternately, deploy on Heroku.
 
-Using [HTTPIE](https://github.com/jkbrzt/httpie), with a local server you can create a basic competency like so: `http PUT :3000/competencies/1 name=Juggling`
+Using [HTTPIE](https://github.com/jkbrzt/httpie), with a local server you can create a basic competency like so:
+
+`http PUT :3000/competencies/1 name=Juggling`
 
 See our competency controller specs for more complex examples.
