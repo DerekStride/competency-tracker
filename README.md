@@ -14,10 +14,15 @@ Ideally would connect to existing tools (HR/employee list) or even be simply an 
 
 - [x] provide a Model for competencies (as per the short description above); 
 - [x] a REST API for CRUD
+- [x] Google OAUTH for user authentication
 - [ ] generate custom competency map of prerequisites, with links to the relevant employees, teams, learning material, etc.;
 - [x] scripts to upload competencies from various sources, mostly spreadsheets in various forms;
 - [ ] a front-end to visualize and track progress, to assess, to navigate, etc.
 
-# HOWTO
+# Howto
 
-See our controller specs for examples.
+This is your typical rails app. Clone it, then run rails server. Alternately, deploy on Heroku.
+
+Using [HTTPIE](https://github.com/jkbrzt/httpie), with a local server you can create a basic competency like so: `http PUT :3000/competencies/1 name=Juggling
+
+See our competency controller specs for more complex examples.
