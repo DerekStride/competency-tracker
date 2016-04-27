@@ -12,11 +12,11 @@ Ideally would connect to existing tools (HR/employee list) or even be simply an 
 
 # Current status and roadmap
 
-[x] provide a Model for competencies (as per the short description above); 
-[x] a REST API for CRUD
-[ ] generate custom competency map of prerequisites, with links to the relevant employees, teams, learning material, etc.;
-[x] scripts to upload competencies from various sources, mostly spreadsheets in various forms;
-[ ] a front-end to visualize and track progress, to assess, to navigate, etc.
+- [x] provide a Model for competencies (as per the short description above); 
+- [x] a REST API for CRUD
+- [ ] generate custom competency map of prerequisites, with links to the relevant employees, teams, learning material, etc.;
+- [x] scripts to upload competencies from various sources, mostly spreadsheets in various forms;
+- [ ] a front-end to visualize and track progress, to assess, to navigate, etc.
 
 # HOWTO
 
