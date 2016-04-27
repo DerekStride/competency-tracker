@@ -1,3 +1,3 @@
 class LearningSource < ActiveRecord::Base
-  belongs_to :learnable
+  belongs_to :competency
 end
