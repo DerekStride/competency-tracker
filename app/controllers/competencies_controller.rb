@@ -1,5 +1,6 @@
 class CompetenciesController < ApplicationController
   before_action :set_competency, only: [:show, :edit, :update, :destroy]
+  before_action :ensure_params, only: [:create]
 
   # GET /competencies
   # GET /competencies.json
@@ -11,6 +12,14 @@ class CompetenciesController < ApplicationController
   # GET /competencies/1
   # GET /competencies/1.json
   def show
+    respond_with @competency do |format|
+      format.json do
+        render json: {}, status: :ok
+      end
+      format.html do
+        redirect_to @competency
+      end
+    end
   end
 
   # GET /competencies/new
@@ -65,6 +74,15 @@ class CompetenciesController < ApplicationController
   end
 
   private
+    def ensure_params
+      unless competency_params.keys.include?('name')
+        respond_to do |format|
+          format.html { redirect_to :back, notice: 'Provide Proper Params' }
+          format.json { head :bad_request }
+        end
+      end
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_competency
       @competency = Competency.find(params[:id])
