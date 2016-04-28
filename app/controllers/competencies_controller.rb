@@ -5,21 +5,12 @@ class CompetenciesController < ApplicationController
   # GET /competencies
   # GET /competencies.json
   def index
-    #@competencies = Competency.all
-    render json: Competency.all
+    @competencies = Competency.all
   end
 
   # GET /competencies/1
   # GET /competencies/1.json
   def show
-    respond_with @competency do |format|
-      format.json do
-        render json: {}, status: :ok
-      end
-      format.html do
-        redirect_to @competency
-      end
-    end
   end
 
   # GET /competencies/new
