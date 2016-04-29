@@ -59,7 +59,6 @@ ActiveRecord::Schema.define(version: 20160406191018) do
     t.integer  "competency_id"
     t.integer  "user_id"
     t.integer  "assessor_id"
-    t.integer  "assessed_id"
     t.string   "level"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
