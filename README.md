@@ -21,8 +21,11 @@ Ideally would connect to existing tools (HR/employee list) or even be simply an 
 
 This is your typical rails app. Clone it, then run rails server. Alternately, deploy on Heroku.
 
-Using [HTTPIE](https://github.com/jkbrzt/httpie), with a local server you can create a basic competency like so:
+Let's use [HTTPIE](https://github.com/jkbrzt/httpie) to populate a local server using the command line. The output to all the commands below should be formatted in JSON, since we're using the `--j` flag:
 
-`http PUT :3000/competencies/1.json name=Juggling`
+* create a competency called "Juggling": `http --j POST :3000/competencies name=Juggling`
+* did it work? let's get all the competencies created so far: `http --j GET :3000/competencies`
+  * you should see one JSON object with id = 1 
+* oops, meant to call it "Can Juggle" instead: `http --j PUT :3000/competencies/1 name="Can Juggle`
 
 See our competency controller specs for more complex examples.
