@@ -36,6 +36,24 @@ RSpec.describe Competency, type: :model do
     end
   end
 
+  describe '#topic' do
+    let(:competency) { build(:competency) }
+    let(:competency_with_topic) { build(:competency, topic: competency) }
+
+    it 'should return the topic of the competency' do
+      expect(competency_with_topic.topic).to eq competency
+    end
+  end
+
+  describe '#subtopics' do
+    let(:competency) { build(:competency) }
+    let(:competency_with_subtopics) { build(:competency, subtopics: [competency]) }
+
+    it 'should return the subtopics of the competency' do
+      expect(competency_with_subtopics.subtopics).to eq [competency]
+    end
+  end
+
   describe '#name' do
     let(:competency) { build(:competency, name: 'Nginx') }
     it 'returns the name of the competency' do
