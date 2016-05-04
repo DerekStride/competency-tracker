@@ -6,6 +6,9 @@ class CompetenciesController < ApplicationController
   # GET /competencies.json
   def index
     @competencies = Competency.all
+    respond_to do |format|
+      format.json { render json: @competencies }
+    end
   end
 
   # GET /competencies/1
