@@ -4,7 +4,6 @@ class CreateCompetencies < ActiveRecord::Migration
       t.timestamps null: false
       t.string :name
       t.string :proficiency
-      t.string :type
       t.references :competency, index: true, foreign_key: true
     end
   end

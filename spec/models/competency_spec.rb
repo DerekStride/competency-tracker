@@ -2,20 +2,69 @@ require 'rails_helper'
 
 RSpec.describe Competency, type: :model do
   describe '#create' do
-    let(:competency) { FactoryGirl.create :competency }
+    let(:competency) { build(:competency) }
 
-  	it "creates a competency successfully" do
+  	it 'creates a competency successfully' do
       expect(competency).to be_instance_of Competency
     end
-    it "creates a competency with prerequisites successfully" do
-      competency_with_prerequisites = FactoryGirl.create :competency, prerequisites: [competency]
+  end
+
+  describe '#prerequisites' do
+    let(:competency) { build(:competency) }
+    let(:competency_with_prerequisites) { build(:competency, prerequisites: [competency]) }
+
+    it 'should list the prerequisites of the competency' do
       expect(competency_with_prerequisites.prerequisites).to eq [competency]
-      expect(competency.postrequisites).to eq [competency_with_prerequisites]
     end
-    it 'creates a competency with a tag' do
-      tag = FactoryGirl.create :tag
-      competency.tags << tag
-      expect(competency.tags).to eq [tag]
+  end
+
+  describe '#postrequisites' do
+    let(:competency) { build(:competency) }
+    let(:competency_with_postrequisites) { build(:competency, postrequisites: [competency]) }
+
+    it 'should list the postrequisites of the competency' do
+      expect(competency_with_postrequisites.postrequisites).to eq [competency]
+    end
+  end
+
+  describe '#tags' do
+    let(:tag) { build(:tag) }
+    let(:competency_with_tags) { build(:competency, tags: [tag]) }
+
+    it 'should list the tags of the competency' do
+      expect(competency_with_tags.tags).to eq [tag]
+    end
+  end
+
+  describe '#topic' do
+    let(:competency) { build(:competency) }
+    let(:competency_with_topic) { build(:competency, topic: competency) }
+
+    it 'should return the topic of the competency' do
+      expect(competency_with_topic.topic).to eq competency
+    end
+  end
+
+  describe '#subtopics' do
+    let(:competency) { build(:competency) }
+    let(:competency_with_subtopics) { build(:competency, subtopics: [competency]) }
+
+    it 'should return the subtopics of the competency' do
+      expect(competency_with_subtopics.subtopics).to eq [competency]
+    end
+  end
+
+  describe '#name' do
+    let(:competency) { build(:competency, name: 'Nginx') }
+    it 'returns the name of the competency' do
+      expect(competency.name).to eq 'Nginx'
+    end
+  end
+
+  describe '#proficiency' do
+    let(:competency) { build(:competency, proficiency: 'Beginner') }
+    it 'returns the Beginner of the competency' do
+      expect(competency.proficiency).to eq 'Beginner'
     end
   end
 end

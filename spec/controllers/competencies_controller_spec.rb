@@ -1,21 +1,18 @@
 require 'rails_helper'
 
 RSpec.describe CompetenciesController, type: :controller do
-
-  before :each do
-  	FactoryGirl.create :competency, name: "Can solve Rubik's cube"
-  end
+  let!(:rubiks) { create(:competency, name: "Can solve Rubik's cube") }
+  let!(:juggle) { create(:competency, name: "Can juggle") }
 
   describe "GET #index" do
     it "responds successfully with an HTTP 200 status code" do
-      get :index
+      get :index, format: :json
       expect(response).to be_success
       expect(response).to have_http_status(200)
     end
 
     it "returns all the competencies" do
-      FactoryGirl.create :competency, name: "Can juggle"
-      get :index
+      get :index, format: :json
       body = JSON.parse(response.body)
       competency_names = body.map { |c| c["name"]}
 
@@ -25,30 +22,23 @@ RSpec.describe CompetenciesController, type: :controller do
   end
 
   describe "POST /competencies" do
-  	it "creates a competency successfully" do 	 
-      expect {post :create, competency: { name: "Can juggle" }}.to change{Competency.count}.by(1)
+  	it "creates a competency successfully" do
+      expect { post :create, competency: { name: "Can juggle" } }.to change{Competency.count}.by(1)
     end
   end
 
   describe "PUT /competencies/1" do
   	it "updates a competency successfully" do
-  	  id = Competency.first.id
-  	  put :update, id: id, competency: { name: "Can solve Sudoku" }
- 
-      expect(Competency.first.name).to eq "Can solve Sudoku"
+  	  put :update, id: rubiks.id, competency: { name: "Can solve Sudoku" }
 
+      expect(rubiks.reload.name).to eq "Can solve Sudoku"
     end
 
     it "successfully updates a competency by adding a sub-competency" do
-      post :create, competency: { name: "Can solve it in 30 seconds or less"}
-
-  	  id = Competency.first.id
-  	  id2 = Competency.last.id
-
-  	  # make id2 the sub-competency of id
-  	  put :update, id: id, competency: {competency: {id: id2} }
-  	  expect(Competency.last.topic).to eq Competency.first
-  	end 
+  	  # make juggle the sub-competency of rubiks
+  	  put :update, id: rubiks.id, competency: {competency: {id: juggle.id} }
+  	  expect(juggle.reload.topic).to eq rubiks
+  	end
   end
 
 end
