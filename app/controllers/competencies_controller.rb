@@ -68,28 +68,29 @@ class CompetenciesController < ApplicationController
   end
 
   private
-    def ensure_params
-      unless competency_params.keys.include?('name')
-        respond_to do |format|
-          format.html { redirect_to :back, notice: 'Provide Proper Params' }
-          format.json { head :bad_request }
-        end
+
+  def ensure_params
+    unless competency_params.keys.include?('name')
+      respond_to do |format|
+        format.html { redirect_to :back, notice: 'Provide Proper Params' }
+        format.json { head :bad_request }
       end
     end
+  end
 
-    # Use callbacks to share common setup or constraints between actions.
-    def set_competency
-      @competency = Competency.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_competency
+    @competency = Competency.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def competency_params
-      params.fetch(:competency, {}).permit(:name)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def competency_params
+    params.fetch(:competency, {}).permit(:name)
+  end
 
-    def add_competencies
-      competency = params.fetch(:competency, {}).permit(competency: :id)
-      return unless competency.present?
-      @competency.subtopics << Competency.find(competency[:competency][:id])
-    end
+  def add_competencies
+    competency = params.fetch(:competency, {}).permit(competency: :id)
+    return unless competency.present?
+    @competency.subtopics << Competency.find(competency[:competency][:id])
+  end
 end
