@@ -25,7 +25,8 @@ Let's use [HTTPIE](https://github.com/jkbrzt/httpie) to populate a local server 
 
 * create a competency called "Juggling": `http --j POST :3000/competencies name=Juggling`
 * did it work? let's get all the competencies created so far: `http --j GET :3000/competencies`
-  * you should see one JSON object with id = 1 
+  * you should see one JSON object with id = 1
 * oops, meant to call it "Can Juggle" instead: `http --j PUT :3000/competencies/1 name="Can Juggle`
+* If you want to add subtopics to a competency, try `http --j PUT :3000/competencies/1 competency:='{"subtopic_ids":["2", "9", "4"]}'`
 
 See our competency controller specs for more complex examples.
