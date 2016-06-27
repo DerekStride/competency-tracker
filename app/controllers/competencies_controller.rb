@@ -68,6 +68,6 @@ class CompetenciesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def competency_params
-    params.fetch(:competency, {}).permit(:name, subtopic_ids: [], prerequisite_ids: [], postrequisite_ids: [])
+    params.fetch(:competency, {}).permit(:name, :competency_id, subtopic_ids: [], prerequisite_ids: [], postrequisite_ids: [])
   end
 end

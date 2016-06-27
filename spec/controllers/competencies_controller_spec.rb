@@ -36,9 +36,8 @@ RSpec.describe CompetenciesController, type: :controller do
 
     it "successfully updates a competency by adding a sub-competency" do
   	  # make juggle the sub-competency of rubiks
-      skip
-  	  # put :update, id: rubiks.id, competency: {competency: {id: juggle.id} }
-  	  # expect(juggle.reload.topic).to eq rubiks
+  	  put :update, id: rubiks.id, competency: { subtopic_ids: [juggle.id] }, format: :json
+  	  expect(juggle.reload.topic).to eq rubiks
   	end
   end
 
