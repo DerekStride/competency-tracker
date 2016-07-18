@@ -34,7 +34,7 @@ gem 'omniauth-google-oauth2', '~> 0.3.1'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug'
+  gem 'pry-byebug'
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3'
   # Use RSpec for testing API calls
@@ -51,6 +51,7 @@ group :development do
   gem 'pry'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  gem 'rest-client'
 end
 
 group :production do
