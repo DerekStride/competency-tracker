@@ -14,6 +14,11 @@ class CompetenciesController < ApplicationController
   # GET /competencies/1
   # GET /competencies/1.json
   def show
+    graph = GraphViz.new(:G, type: :digraph)
+    competency = Competency.find(params[:id])
+    graphviz(graph, competency)
+    @file = Tempfile.new(['foo', '.png'], "#{Rails.root}/public/images")
+    graph.output(png: @file.path)
   end
 
   # POST /competencies
@@ -69,5 +74,14 @@ class CompetenciesController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def competency_params
     params.fetch(:competency, {}).permit(:name, :competency_id, subtopic_ids: [], prerequisite_ids: [], postrequisite_ids: [])
+  end
+
+  def graphviz(graph, competency, depth = 0)
+    topic_node = graph.add_node(competency.name)
+    competency.subtopics.each do |subtopic|
+      subtopic_node = graph.add_node(subtopic.name)
+      graph.add_edges(topic_node, subtopic_node)
+      graphviz(graph, subtopic, depth + 1)
+    end
   end
 end

@@ -18,4 +18,6 @@ class Competency < ActiveRecord::Base
 
   has_many :user_competencies
   has_many :users, through: :user_competencies
+
+  validates :name, presence: true
 end
